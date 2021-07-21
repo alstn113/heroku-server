@@ -18,4 +18,8 @@ router.post("/create", (req, res) => {
   });
 });
 
+router.get("/give", (req, res) => {
+  return res.json({ nickname: "김민수" });
+});
+
 module.exports = router;
