@@ -1,9 +1,10 @@
 const express = require("express");
-const { User } = require("../models");
+const User = require("../models/user");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("test1", { User: User });
+  const user = User.findAll({});
+  res.render("test1", { User: user });
 });
 
 router.get("/test", (req, res) => {
