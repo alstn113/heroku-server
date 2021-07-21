@@ -1,12 +1,9 @@
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
-<h1>여기는 test1이다</h1>
+<form action="/create" method="post">
+  nick
+  <input type="text" name="nick" />
+  age
+  <input type="text" name="age" />
+</form>
 {% for user in User %}
 <div>{{ user.nick }}</div>
 <div>{{user.age}}</div>

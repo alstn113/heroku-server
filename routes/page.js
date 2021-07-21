@@ -11,4 +11,11 @@ router.get("/test", (req, res) => {
   res.render("test2");
 });
 
+router.post("/create", (req, res) => {
+  User.create({
+    nick: req.body.nick,
+    age: req.body.age,
+  });
+});
+
 module.exports = router;
