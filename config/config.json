@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "bf32554869c853",
-    "password": "f4805e89",
+    "username": "b9caac9acfc018",
+    "password": "36841c21",
     "database": "test",
     "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "bf32554869c853",
-    "password": "f4805e89",
-    "database": "test",
-    "host": "us-cdbr-east-04.cleardb.com",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "bf32554869c853",
-    "password": "f4805e89",
-    "database": "test",
-    "host": "us-cdbr-east-04.cleardb.com",
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
