@@ -8,7 +8,7 @@ const cors = require("cors");
 
 dotenv.config();
 const corsOption = {
-  origin: "https://vue-test-63194.herokuapp.com/",
+  origin: "https://vue-test-63194.herokuapp.com",
   credentials: true,
 };
 const pageRouter = require("./routes/page");
