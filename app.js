@@ -4,15 +4,20 @@ const morgan = require("morgan");
 const path = require("path");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
+const corsOption = {
+  origin: "https://vue-test-63194.herokuapp.com/",
+  credentials: true,
+};
 const pageRouter = require("./routes/page");
 
 const { sequelize } = require("./models");
 
 const app = express();
 
-app.set("port", process.env.PORT || 8001);
+app.set("port", process.env.PORT || 3000);
 app.set("view engine", "html");
 nunjucks.configure("views", {
   express: app,
@@ -29,10 +34,10 @@ sequelize
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cors(corsOption));
 
 app.use("/", pageRouter);
 

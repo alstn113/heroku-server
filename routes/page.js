@@ -19,4 +19,8 @@ router.post("/create", async (req, res) => {
   res.redirect("/");
 });
 
+router.get("/api/book", async (req, res) => {
+  res.json({ title: "kawaii" });
+});
+
 module.exports = router;
