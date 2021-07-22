@@ -22,5 +22,11 @@ router.post("/create", async (req, res) => {
 router.get("/api/book", async (req, res) => {
   res.json({ title: "kawaii" });
 });
-
+router.post("/api/book", async (req, res) => {
+  await User.create({
+    nick: req.body.nick,
+    age: req.body.age,
+  });
+  res.send("ok");
+});
 module.exports = router;
