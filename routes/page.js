@@ -27,6 +27,5 @@ router.post("/api/book", async (req, res) => {
     nick: req.body.nick,
     age: req.body.age,
   });
-  res.send("ok");
 });
 module.exports = router;
