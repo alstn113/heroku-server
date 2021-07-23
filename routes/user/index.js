@@ -1,12 +1,12 @@
 const express = require("express");
-const router = express.Router();
+const user = express.Router();
 const controller = require("./controller");
 
 /**
  *   @description /api/user
  */
 
-router.get("/api/user", controller.userList);
-router.post("/api/user", controller.createUser);
+user.get("/", controller.userList);
+user.post("/", controller.createUser);
 
-module.exports = router;
+module.exports = user;
