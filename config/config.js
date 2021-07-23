@@ -6,7 +6,7 @@ module.exports = {
     database: "deploy",
     host: "127.0.0.1",
     dialect: "mysql",
-    logging: false,
+    logging: false, // log에 sql query 뜨는 거 막음
   },
   test: {
     username: process.env.USERNAME,
