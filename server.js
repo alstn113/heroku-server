@@ -2,7 +2,6 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
-const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
@@ -11,18 +10,13 @@ const corsOption = {
   origin: "https://vue-test-63194.herokuapp.com",
   credentials: true,
 };
-const pageRouter = require("./routes/page");
+const apiRouter = require("./routes");
 
 const { sequelize } = require("./models");
 
 const app = express();
 
 app.set("port", process.env.PORT || 3000);
-app.set("view engine", "html");
-nunjucks.configure("views", {
-  express: app,
-  watch: true,
-});
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -39,19 +33,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cors(corsOption));
 
-app.use("/", pageRouter);
+app.use("/api", apiRouter);
 
 app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-  error.status = 404;
-  next(error);
+  res.status(404).send("Sorry cant find that!");
 });
 
 app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-  res.status(err.status || 500);
-  res.render("error");
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
 app.listen(app.get("port"), () => {

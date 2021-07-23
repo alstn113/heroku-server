@@ -2,9 +2,9 @@
   "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon server"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,6 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.12",
-    "nunjucks": "^3.2.3",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"
   }
