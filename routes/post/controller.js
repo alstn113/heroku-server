@@ -10,11 +10,19 @@ exports.createPost = async (req, res, next) => {
 };
 
 exports.getPostDetail = async (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const postDetail = await Post.findOne({
     where: { id },
   });
   res.json({ postDetail });
+};
+
+exports.deletePost = async (req, res, next) => {
+  const { id } = req.params;
+  await Post.destroy({
+    where: { id },
+  });
+  res.json({ success: true });
 };
 
 exports.getPostList = async (req, res, next) => {

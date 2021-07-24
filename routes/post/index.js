@@ -9,5 +9,6 @@ const controller = require("./controller");
 post.get("/", controller.getPostList);
 post.get("/:id", controller.getPostDetail);
 post.post("/", controller.createPost);
+post.delete("/:id", controller.deletePost);
 
 module.exports = post;
