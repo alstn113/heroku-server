@@ -8,6 +8,10 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(50),
           allowNull: false,
         },
+        description: {
+          type: Sequelize.STRING(50),
+          allowNull: true,
+        },
         content: {
           type: Sequelize.TEXT,
           allowNull: false,

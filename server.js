@@ -6,9 +6,10 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 dotenv.config();
+
+const origin = process.env.NODE_ENV == "production" ? "https://vue-test-63194.herokuapp.com" : "http://localhost:8080";
 const corsOption = {
-  //origin: "http://localhost:8080",
-  origin: "https://vue-test-63194.herokuapp.com",
+  origin: origin,
   credentials: true,
 };
 const apiRouter = require("./routes");

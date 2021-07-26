@@ -29,12 +29,12 @@ exports.deletePost = async (req, res, next) => {
 
 exports.getPostList = async (req, res, next) => {
   let options = {};
-  const take = 5;
+  const take = 10;
   if (req.query.page) {
     const page = parseInt(req.query.page) || 1;
     options = {
       ...options,
-      limit: 5, // 몇 개 가져올지
+      limit: take, // 몇 개 가져올지
       offset: (page - 1) * take, // 몇 개 뛰어넘을지
       //프론트에서 사용할만큼만 주고 붙여서 사용함.
     };
