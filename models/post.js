@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class Post extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -22,7 +22,7 @@ module.exports = class User extends Sequelize.Model {
         timestamps: true,
         underscored: false,
         modelName: "Post",
-        tableName: "post",
+        tableName: "posts",
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -30,5 +30,7 @@ module.exports = class User extends Sequelize.Model {
     );
   }
 
-  static associate(db) {}
+  static associate(db) {
+    db.Post.belongsToMany(db.Tag, { through: "PostTag" });
+  }
 };
