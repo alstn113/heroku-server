@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const passport = require("passport");
 
 dotenv.config();
 
@@ -14,10 +15,12 @@ const corsOption = {
 };
 const apiRouter = require("./routes");
 
+const passportConfig = require("./passport");
 const { sequelize } = require("./models");
 
 const app = express();
 
+passportConfig();
 app.set("port", process.env.PORT || 3000);
 sequelize
   .sync({ force: false })
@@ -33,6 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(passport.initialize());
 app.use(cors(corsOption));
 
 app.use("/api", apiRouter);
