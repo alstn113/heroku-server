@@ -32,3 +32,12 @@ exports.login = async (req, res, next) => {
     return res.json({ error: "존재하지 않는 이메일입니다" });
   }
 };
+
+exports.getUser = async (req, res, next) => {
+  const decoded = authenticateUtils.verifyAccessToken(req.cookies.accessToken);
+  res.json(decoded);
+};
+
+exports.logout = async (req, res, next) => {
+  res.clearCookie("accessToken").json({ success: true });
+};

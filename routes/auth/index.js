@@ -8,5 +8,7 @@ const controller = require("./controller");
 
 auth.post("/register", controller.register);
 auth.post("/login", controller.login);
+auth.get("/getUser", controller.getUser);
+auth.post("/logout", controller.logout);
 
 module.exports = auth;

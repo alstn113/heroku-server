@@ -13,3 +13,9 @@ exports.encryptPassword = (password) => {
 exports.generateAccessToken = (information) => {
   return jwt.sign(information, secretKey, { expiresIn: "1h", issuer: "vue-test-63194", subject: "accessToken" });
 };
+
+exports.verifyAccessToken = (token) => {
+  if (token) {
+    return jwt.verify(token, secretKey);
+  }
+};
