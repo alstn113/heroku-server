@@ -1,10 +1,12 @@
 const Post = require("../../models/post");
+const User = require("../../models/user");
 
 exports.createPost = async (req, res, next) => {
   const { title, content } = req.body;
   await Post.create({
     title,
     content,
+    user_id: req.user.id,
   });
   res.json({ success: true });
 };
@@ -13,8 +15,8 @@ exports.getPostDetail = async (req, res, next) => {
   const { id } = req.params;
   const postDetail = await Post.findOne({
     where: { id },
+    include: [{ model: User, attributes: ["nick"] }],
     raw: true,
-    nest: true,
   });
   res.json({ postDetail });
 };
@@ -44,9 +46,9 @@ exports.getPostList = async (req, res, next) => {
   });
   const lastpage = Math.ceil(total / take);
   const postList = await Post.findAll({
-    raw: true,
-    nest: true,
+    include: [{ model: User, attributes: ["nick"] }],
     order: [["createdAt", "DESC"]],
+    raw: true,
     ...options,
   });
   res.json({ postList, lastpage });

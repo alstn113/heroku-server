@@ -10,6 +10,6 @@ const passport = require("passport");
 post.get("/", controller.getPostList);
 post.get("/:id", controller.getPostDetail);
 post.post("/", passport.authenticate("jwt", { session: false }), controller.createPost);
-post.delete("/:id", controller.deletePost);
+post.delete("/:id", passport.authenticate("jwt", { session: false }), controller.deletePost);
 
 module.exports = post;

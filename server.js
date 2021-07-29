@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
+const session = require("express-session");
 const cors = require("cors");
 const passport = require("passport");
 
@@ -38,6 +39,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(passport.initialize());
 app.use(cors(corsOption));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+    },
+  })
+);
 
 app.use("/api", apiRouter);
 

@@ -1,13 +1,13 @@
 const User = require("../../models/user");
-const authenticateUtils = require("../../utils/authenticate");
+const authUtils = require("../../utils/auth");
 
 exports.register = async (req, res, next) => {
   const { email, password, nick } = req.body;
-  const exUser = await User.findOne({ where: { email: email } });
+  const exUser = await User.findOne({ where: { email: email }, raw: true });
   if (exUser) {
     return res.json({ error: "이미 존재하는 이메일입니다" });
   } else {
-    const hash = await authenticateUtils.encryptPassword(password);
+    const hash = await authUtils.encryptPassword(password);
     await User.create({
       email,
       nick,
@@ -18,11 +18,11 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ where: { email: email } });
+  const user = await User.findOne({ where: { email: email }, raw: true });
   if (user) {
-    const result = await authenticateUtils.certifyPassword(password, user.password);
+    const result = await authUtils.certifyPassword(password, user.password);
     if (result) {
-      const accessToken = await authenticateUtils.generateAccessToken({ id: user.id, email: user.email, nick: user.nick });
+      const accessToken = await authUtils.generateAccessToken({ id: user.id, email: user.email, nick: user.nick });
       res.cookie("accessToken", accessToken, { sameSite: "none", httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 });
       return res.json({ success: true });
     } else {
@@ -34,7 +34,7 @@ exports.login = async (req, res, next) => {
 };
 
 exports.getUser = async (req, res, next) => {
-  const decoded = authenticateUtils.verifyAccessToken(req.cookies.accessToken);
+  const decoded = authUtils.verifyAccessToken(req.cookies.accessToken);
   res.json(decoded);
 };
 
