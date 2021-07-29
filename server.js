@@ -8,7 +8,7 @@ const passport = require("passport");
 
 dotenv.config();
 
-const origin = process.env.NODE_ENV == "production" ? "https://vue-test-63194.herokuapp.com" : "http://localhost:8080";
+const origin = process.env.NODE_ENV == "production" ? "https://velog-clone.herokuapp.com" : "http://localhost:8080";
 const corsOption = {
   origin: origin,
   credentials: true,
