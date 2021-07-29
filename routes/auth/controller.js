@@ -23,7 +23,17 @@ exports.login = async (req, res, next) => {
     const result = await authenticateUtils.certifyPassword(password, user.password);
     if (result) {
       const accessToken = await authenticateUtils.generateAccessToken({ id: user.id, email: user.email, nick: user.nick });
-      res.cookie("accessToken", accessToken, { sameSite: "none", httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 });
+      if (process.env.NODE_ENV === "production") {
+        res.cookie("accessToken", accessToken, {
+          sameSite: "none",
+          httpOnly: true,
+          secure: true,
+          maxAge: 1000 * 60 * 60,
+          domain: "vue-test-63194.herokuapp.com",
+        });
+      } else {
+        res.cookie("accessToken", accessToken, { sameSite: "none", httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 });
+      }
       return res.json({ success: true });
     } else {
       return res.json({ error: "비밀번호가 틀렸습니다" });
